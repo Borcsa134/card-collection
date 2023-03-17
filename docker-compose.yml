@@ -1,0 +1,15 @@
+version: '3'
+services:
+  cc:
+    build: ./
+    image: card-collection
+    working_dir: /usr/src/app/card-collection
+    environment:
+      - "NEXT_WEBPACK_USEPOLLING=1"
+    volumes:
+      - ./:/usr/src/app/
+      - /usr/src/app/node_modules/
+    ports:
+      - 3000:3000
+    command: yarn dev
+
