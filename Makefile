@@ -1,4 +1,4 @@
-.PHONY: start stop build sh tsh logs test restart config commit lint psql migrate rollback tpsql tmigrate trollback demo-data promote
+.PHONY: start stop build sh tsh logs test restart config commit lint psql migrate rollback tpsql tmigrate trollback
 
 container=cc
 
@@ -21,6 +21,10 @@ build:
 sh:
 	docker compose exec $(container) /bin/sh
 
+# console to the DB
+psql:
+	docker compose exec postgres psql -U app_dev dev
+
 # check console output
 logs:
 	docker compose logs -f
@@ -28,3 +32,6 @@ logs:
 # show the combined compose file used
 config:
 	docker compose config
+
+migrate:
+	docker compose exec $(container) /bin/sh -c "npx prisma migrate dev"
