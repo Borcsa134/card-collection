@@ -35,3 +35,11 @@ config:
 
 migrate:
 	docker compose exec $(container) /bin/sh -c "npx prisma migrate dev"
+
+promote:
+	echo "Make sure master/production branch is up-to-date! And what you are about to deploy is already on staging! Hit [ENTER] to continue"
+	$(wait_for_input)
+	git checkout production
+	git rebase main
+	git push
+	git checkout main
