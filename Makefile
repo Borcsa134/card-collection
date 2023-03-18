@@ -1,5 +1,15 @@
 .PHONY: start stop build sh tsh logs test restart config commit lint psql migrate rollback tpsql tmigrate trollback
 
+# \
+!ifndef 0 # \
+wait_for_input=pause # \
+!else
+wait_for_input=read
+# \
+!endif
+
+
+
 container=cc
 
 # start all the containers
